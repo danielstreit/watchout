@@ -1,5 +1,20 @@
-/* your beautiful css styling goes here! */
+.enemy {
+  -webkit-animation: spin 1s linear infinite;
+  -webkit-transform-origin: 50% 50%;
+}
 
-/* Note: an asteroid image is included in this repo. 
-Feel free to use it if you like. */
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 
+/*@-webkit-keyframes enemy {
+    from{
+        -webkit-transform: rotate(0deg);
+    }
+    to{
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+image.enemy {
+    -webkit-animation: spin 2s linear infinite;
+}
+*/
