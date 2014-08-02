@@ -43,19 +43,29 @@ var drag = d3.behavior.drag()
                   .attr('cy', y)
               });
 
-var enemies = svg.selectAll('circle')
+var enemies = svg.selectAll('image')
                 .data(data)
                 .enter()
-                .append('circle')
-                .attr('cx', function(d, i) {
+                .append('svg:image')
+                .classed('enemy', true)
+                .attr('xlink:href', 'shuriken.png')
+                .attr('x', function(d, i) {
                   return Math.random() * _w;
                 })
-                .attr('cy', function(d, i) {
+                .attr('y', function(d, i) {
                   return Math.random() * _h;
                 })
-                .attr('r', function(d, i) {
-                  return d;
-                });
+                .attr('width', 20)
+                .attr('height', 20);
+                // .attr('cx', function(d, i) {
+                //   return Math.random() * _w;
+                // })
+                // .attr('cy', function(d, i) {
+                //   return Math.random() * _h;
+                // })
+                // .attr('r', function(d, i) {
+                //   return d;
+                // });
 
 var player = svg.selectAll('player')
                 .data(pCord)
@@ -77,18 +87,16 @@ var player = svg.selectAll('player')
 var update = function() {
   enemies.transition()
           .duration(2000)
-          .attr('cy', function(d, i) {
+          .attr('y', function(d, i) {
             return Math.random() * _h;
           })
-          .attr('cx', function(d, i) {
+          .attr('x', function(d, i) {
             return Math.random() * _w;
           })
 
 }
 
 var collision = function() {
-  // reset game
-  console.log('Collision!!');
   if (score > high) {
     high = score;
     dHigh.text(high);
@@ -104,8 +112,8 @@ var checkCollision = function(enemy) {
   enemy = d3.select(enemy);
   var px = player.attr('cx');
   var py = player.attr('cy');
-  var ex = enemy.attr('cx');
-  var ey = enemy.attr('cy');
+  var ex = enemy.attr('x') - radius;
+  var ey = enemy.attr('y') - radius;
   return 2 * radius > Math.sqrt(Math.pow(px - ex, 2) + Math.pow(py - ey, 2));
 };
 
